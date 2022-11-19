@@ -7,16 +7,23 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
 		return;
 	}
 
-	// console.log("PATH ", req.url);
+    if(req.nextUrl.pathname === '/') {
+        return
+    }
+
+	// console.log("PATH ", req.nextUrl.pathname);
 	const slug = req.nextUrl.pathname.split("/").pop();
 	// console.log(slug);
 
-    const response = await fetch(`${req.nextUrl.origin}/api/get-url/${slug}`)
-    const data = await response.json()
-    // console.log("data? ", data)
-    if(data?.url) {
-        // console.log(data.url)
-        return NextResponse.redirect(data.url)
+    if(slug && slug?.length > 0) {
+        console.log("slug /", slug)
+        const response = await fetch(`${req.nextUrl.origin}/api/get-url/${slug}`)
+        const data = await response.json()
+        console.log("data? ", data)
+        if(data?.url) {
+            // console.log(data.url)
+            return NextResponse.redirect(data.url)
+        }
     }
 }
 
@@ -28,6 +35,6 @@ export const config = {
 		 * - _next/static (static files)
 		 * - favicon.ico (favicon file)
 		 */
-		"/((?!_next/static|fonts|favicon.ico|_error).*)",
+		"/((?!_next/static|fonts|favicon.ico|_error|vercel.svg).*)",
 	],
 };
