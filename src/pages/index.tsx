@@ -78,7 +78,7 @@ const Home: NextPage = () => {
             error && <p className='text-sm text-gray-500'>Error</p>
           }
           {
-            added && <a href={`https://dushort/${added}`} className='text-sm text-gray-500 underline'>http://localhost:3000/{added}</a>
+            added && <a href={`https://dushort.vercel.app/${added}`} className='text-sm text-gray-500 underline'>http://localhost:3000/{added}</a>
           }
         </div>
       </main>
