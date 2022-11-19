@@ -1,8 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../db/client";
+import { prisma } from "../../../db/client";
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default async(req: NextApiRequest, res: NextApiResponse) => {
-    const slug = req.query["slug"]
+    const slug = req.query["slug"]?.toString()
+    // console.log(slug)
 
     if(!slug) {
         res.statusCode = 404
@@ -26,5 +28,5 @@ export default async(req: NextApiRequest, res: NextApiResponse) => {
         return;
     }
 
-    return res.redirect(data.url)
+    return res.json(data)
 }
