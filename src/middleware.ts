@@ -11,7 +11,8 @@ export async function middleware(req: NextRequest, ev: NextFetchEvent) {
 	const slug = req.nextUrl.pathname.split("/").pop();
 	// console.log(slug);
 
-    const data = await (await fetch(`${req.nextUrl.origin}/api/get-url/${slug}`)).json()
+    const response = await fetch(`${req.nextUrl.origin}/api/get-url/${slug}`)
+    const data = await response.json()
     // console.log("data? ", data)
     if(data?.url) {
         // console.log(data.url)
